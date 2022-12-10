@@ -1,0 +1,35 @@
+public with sharing class ExternalPOSTReq {
+
+    public void sendPOSTReq(){
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint('https://eddy.rhinoafrica.com/submit?ed_website=72&ed_passkey=devpass');
+        req.setMethod('POST');
+        req.setHeader('Content-Type','application/json');
+        String EnqtoPass = JSON.serialize(generateEnquiry());
+        System.debug('This is the Enquiry JSON :::' + EnqtoPass);
+        req.setBody(EnqtoPass);
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        System.debug(res.getBody());     
+        
+    }
+    
+    private Enquiry__c generateEnquiry(){
+        Enquiry__c enq1 = new Enquiry__c();
+        enq1.Enquiry_Type__c = 'Email';
+        enq1.First_Name__c = 'Suman';
+        enq1.Last_Name__c = 'Pershad';
+        enq1.Email__c = 'sumanrpershad@gmail.com';
+        enq1.Country__c = 'United Kingdom (GB)';
+        enq1.Holiday_Type__c = 'Value';        
+        
+        return enq1;
+    }
+    
+    private EnquiryWrapper wrapEnquiry(Enquiry__c enq1 ){
+        EnquiryWrapper wrapper = new EnquiryWrapper();
+        wrapper.enq1 = enq1;
+        return wrapper;
+    }
+    
+}
