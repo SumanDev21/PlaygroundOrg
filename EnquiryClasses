@@ -1,0 +1,10 @@
+@RestResource(UrlMapping = '/EnquiryCreate/*')
+global with sharing class RESTAPI {
+
+    
+    @HttpPost
+    global static String insertEnquiryfromapi(Enquiry__c enq){
+        insert enq;
+        return enq.Id;
+    }
+}
