@@ -1,0 +1,4 @@
+public with sharing class EnquiryWrapper {
+
+     public Enquiry__c enq1;
+}
